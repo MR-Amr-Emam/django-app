@@ -1,0 +1,141 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+
+{% block content %}
+<link href="{% static 'css/home_page.css' %}" rel="stylesheet">
+<link href="{% static 'css/icons.css' %}" rel="stylesheet">
+
+<div class="base-widget">
+    <div class="base-content">
+        <p>what are you waiting for..</p>
+        <button class="btn btn-primary submit-btn d-none"><a href="{% url 'interface-submit_project' %}"
+        class="text-decoration-none text-light">submit now</a></button>
+        <button class="btn btn-primary getstarted-btn d-none"><a href="{% url 'interface-signup' %}"
+        class="text-decoration-none text-light">get started</a></button>
+    </div>
+</div>
+<div class="container fs-3 my-5">
+    
+    <div class="row">
+        <div class="col-4">
+            <img class="img-row-1" class="w-100" src="{% static 'images/row11.jpg' %}">
+        </div>
+
+        <div class="col-8">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="body-card text-center">
+                            <i class="fi fi-rr-bulb main-f-color my-2 d-block"></i>
+                            <h3>success</h3>
+                            <p class="p-card">Many studieveness of optimism<br> as a psychological phenomenon,
+                               leading to various theoret conceptualized as ,
+                               “attrd illusion”.<br>ding to various theoret conceptua
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fi fi-rr-list-check main-f-color my-2 d-block"></i>
+                            <h3>responsivity</h3>
+                            <p class="p-card">The term rinput–output relationship
+                               in non-electrical systems. For example, a the visu In this case,
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fi fi-rr-bolt main-f-color my-2 d-block  "></i>
+                            <h3>quick reviews</h3>
+                            <p class="p-card">Quick Reviews is a very simple website designed to let you create short,
+                               visually du want, and share
+                            </p>
+                        </div>                
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="container mt-5">
+
+    <div class="row">
+        <h1 class="row text-capitalize fs-1 fw-bold main-f-color">our experience</h1>
+    </div>
+
+    <div class="row reveal reveal-left">
+        <div class="col"><img src="{% static 'images/row2.jpg' %}" class="rounded w-100 "></div>
+        <div class="col fs-4">
+            <h2 class="main-f-color">team work</h2>
+            <ul class="row-bottom"><li>work with our team</li><li>try outstanding experience</li><li>know great people</li></ul>
+        </div>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="row reveal reveal-right">
+        <div class="col fs-4">
+            <h2 class="main-f-color">perfect reviews</h2>
+            <ul class="row-bottom"><li>perfect reviews for your projects</li><li>we will help you to begin</li><li>fast and accurate experience</li></ul>
+        </div>
+        <div class="col"><img src="{% static 'images/row3.jpg' %}" class="rounded w-100 "></div>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="row reveal reveal-left">
+        <div class="col"><img src="{% static 'images/row4.jpg' %}" class="rounded w-100 "></div>
+        <div class="col fs-4">
+            <h2 class="main-f-color">be proud</h2>
+            <ul class="row-bottom"><li>be happy, make your family proud</li><li>start new life</li><li>be proud of your self</li></ul>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="container-fluid h-50 contact-content">
+
+    <div class="row">
+        <div class="col">
+            <h3>email</h3>
+            <p>amradar757@gmail.com</p>
+        </div>
+        <div class="col">
+            <h3>linked in</h3>
+            <p><a href="https://www.linkedin.com/in/amr-emam-0b5255231" class="a-linkedin">visit us</a></p>
+        </div>
+        <div class="col">
+            <h3>phone number</h3>
+            <p>01152182723</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>powered by</h3>
+            <p>django</p>
+        </div>
+        <div class="col">
+            <h3>made by</h3>
+            <p>Amr Emam</p>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<script src="{% static 'js/home_page.js' %}"></script>
+
+{% endblock %}

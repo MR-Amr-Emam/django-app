@@ -1,0 +1,36 @@
+async function getCompleteProjects(){
+    var response = await fetch(projectsUrl + "?" + document.location.href.split("?")[1])
+    var data = await response.json()
+    return data
+}
+
+function loadProjects(data){
+    if(data.length==0){
+        document.querySelector("#none").classList.remove("d-none")
+        return
+    }
+    var fragment = new DocumentFragment()
+    var ele = document.createElement("span")
+    for(let i=0; i<data.length;i++){
+        if(data[i]["review"]["accepted"] == true){
+            var stateColor = "text-success"
+            var state = "accepted"
+        }else if(data[i]["review"]["accepted"] == false){
+            var stateColor = "text-danger"
+            var state = "rejected"
+        }
+        ele.innerHTML +=`<div class="border-top pb-3 ps-2 row">
+            <p class="text-success">${data[i]["review"]["review_date"]}</p>
+            <p class="${stateColor} fw-bold fs-5">${state}</p>
+            <p>made by <span class="fw-bold"><a class="text-decoration-none text-black" href="${document.location.origin
+                +data[i]["profile_url"]}">${data[i]["publisher_username"]}</a></span></p>
+            <p>id ${data[i]["id"]}</p>
+            <p>${data[i]["description"]}</p>
+            <p><a href="${document.location.origin + data[i]["project_page_url"]}">view project</a></p>
+        </div>`
+        fragment.appendChild(ele)
+        document.querySelector("#projects").appendChild(fragment)
+    }
+}
+
+getCompleteProjects().then((data)=>{loadProjects(data)})

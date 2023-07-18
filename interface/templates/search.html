@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div id="projects" class="container border mt-4">
+    <p id="none" class="fs-1 d-none"> no result found </p>
+</div>
+
+
+<script>
+    const projectsUrl = document.location.origin + "{% url 'projects-searchprojects' %}"
+</script>
+
+<script src="{% static 'js/search.js' %}"></script>
+
+{% endblock %}

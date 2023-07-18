@@ -1,0 +1,88 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/cropper css/cropper.css' %}" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<div class="popup-overlay">
+    <div type="button" class="close-btn">&times;</div>
+    <div class="popup-content">
+        <div class="image-canvas-container">
+            <div class='image-container'>
+                <img class='popup-profile-image'>
+            </div>
+        </div>
+        <br>
+        <div class="image-buttons">
+            <button type="button" class="btn btn-primary" id="crop-btn">crop</button>
+            &nbsp; &nbsp;
+            <label for="change-image-btn" class="btn btn-primary">
+                <input type="file" class="remove-btn" id="change-image-btn" accept="image/png, image/jpeg">change image</input>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="userinformationpopup-overlay">
+        
+    <div  class="userinformationpopup-content w-50 text-light">
+        <div type="button" class="userinformationpopupclose-btn me-4">&times;</div>
+        <form>
+            <a href="{% url 'authenticate-logout' %}" class="text-light d-none logout">logout</a>
+            <div class="mb-3">
+                <label for="form-username" class="form-label">username</label>
+                <input type="text" class="form-control fs-5" id="form-username">
+            </div>
+            <div class="mb-3">
+                <label for="form-email" class="form-label">Email address</label>
+                <input type="email" class="form-control fs-5" id="form-email">
+            </div>
+            <div class="mb-3">
+                <label for="form-bio" class="form-label">bio</label>
+                <input type="email" class="form-control fs-5" id="form-bio">
+            </div>
+            <button type="button" class="btn btn-primary change-btn d-none">change</button>
+        </form>
+    </div>
+</div>
+
+
+<div id="loading-screen" class="">
+    <div class="loading-content">
+        loading...
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row image-row">
+        <div class="col"></div>
+        <div class="col">
+            <img id="profile-image" class="rounded-circle">
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <p id="username" class="fs-1 text-center"></p>
+            <p id="bio" class="text-center"></p>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+<script>
+    const username = window.location.pathname.split("profile_")[1].split("/")[0];
+    const userUrl = "{% url 'authentication-user' 'username' %}".replace("username", username);
+    const userInformationUrl = "{% url 'authentication-userinformation' 'username' %}".replace("username", username);
+</script>
+
+
+<script src="{% static 'js/cropper js/cropper.min.js' %}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

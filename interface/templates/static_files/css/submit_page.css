@@ -1,0 +1,40 @@
+.base-widget{
+    background-color: #6f42c1;
+    height: 95%;
+}
+
+.bg-image{
+    width:100%;
+}
+
+.card{
+    background-color: #e2d9f2;
+    box-shadow: 0px 0px 6px;
+    position: static;
+}
+
+/* end content */
+
+.contact-content{
+    background-color: rgb(26, 0, 75);
+    color: rgb(89, 55, 153);
+}
+
+.a-linkedin{
+    text-decoration: none;
+    color: rgb(89, 55, 153);
+}
+
+.popup{
+    position: fixed;
+    width: 100vw;
+    height:100vh;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow-y: scroll;
+}
+
+.close-btn:hover{
+    cursor: pointer;
+}

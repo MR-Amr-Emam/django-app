@@ -1,0 +1,65 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/projectview.css' %}">
+
+<div id="project-popup" class="popup d-none">
+    <a id="close-popup-project" href="#" class="text-decoration-none fs-1 fw-bold
+    position-absolute end-0 me-3 mt-2 text-white">&times;</a>
+    <div class="w-75 position-absolute start-50 translate-middle-x mt-5">
+
+        <div class="position-absolute start-50 translate-middle-x mb-5">
+            <button id="project-prev-btn" class="btn btn-primary me-2 px-4">&#8678; prev</button>
+            <button id="project-next-btn" class="btn btn-primary ms-2 px-4">next &#8680;</button>
+        </div>
+
+        <canvas id="project-canvas" class="w-100 my-5"></canvas>
+
+    </div>
+</div>
+
+<div id="review-popup" class="popup d-none">
+    <a id="close-popup-review" href="#" class="text-decoration-none fs-1 fw-bold
+    position-absolute end-0 me-3 mt-2 text-white">&times;</a>
+    <div class="w-75 position-absolute start-50 translate-middle-x mt-5">
+        <div class="btns position-absolute start-50 translate-middle-x">
+            <button id="review-prev-btn" class="btn btn-primary me-2 px-4">&#8678; prev</button>
+            <button id="review-next-btn" class="btn btn-primary ms-2 px-4">next &#8680;</button>
+        </div>
+        <canvas id="review-canvas" class="w-100 my-5"></canvas>
+    </div>
+</div>
+
+
+<div class="container m-4">
+    <div class="row border-top">
+        <p class="text-success assignment-date"></p>
+        <p class="fs-5 fw-bold accepted"></p>
+        <p>made by <a class="text-decoration-none text-black profile-link"><span class="publisher fw-bold"></span></a></p>
+        <p class="description"></p>
+        <div class="mt-5">
+            <button id="view-project-btn" class="btn btn-primary me-5">view project</button>
+            <button id="view-review-btn" class="btn btn-primary ms-5">view review</button>
+        </div>
+    </div>
+    <div class="h-25"></div>
+    <div class="row border-top">
+        <p><a id="download-project" href="#" class="me-5">download project</a><a id="download-review" href="#" class="ms-5">download review</a></p>
+    </div>
+</div>
+
+
+<script>
+    const projectId = document.location.href.split("complete_project_")[1].split("/")[0]
+    const projectDataUrl = document.location.origin + "{% url 'projects-completeproject' '555' %}".replace("555", projectId)
+    const downloadProjectUrl = document.location.origin + "{% url 'projects-downloadproject' '555' %}".replace("555", projectId)
+    const downloadReviewUrl = document.location.origin + "{% url 'review-downloadreview' '555' %}".replace("555", projectId)
+</script>
+
+<script src="{% static 'js/pdf js/pdf.js' %}"></script>
+
+<script src="{% static 'js/projectview.js' %}"></script>
+
+
+{% endblock %}

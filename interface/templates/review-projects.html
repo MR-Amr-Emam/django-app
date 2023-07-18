@@ -1,0 +1,16 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="projects" class="border rounded ms-3 mt-3 w-75"></div>
+
+
+
+<script>
+    const projectsUrl = location.origin + "{% url 'projects-projects' %}"
+</script>
+
+<script src="{% static 'js/review_projects.js' %}"></script>
+
+{% endblock %}

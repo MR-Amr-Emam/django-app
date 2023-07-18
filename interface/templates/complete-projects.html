@@ -1,0 +1,16 @@
+{% extends "base_template.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div id="projects" class="container border mt-4"></div>
+
+
+<script>
+    const projectsUrl = document.location.origin + "{% url 'projects-completeprojects' %}"
+</script>
+
+<script src="{% static 'js/complete-projects.js' %}"></script>
+
+{% endblock %}

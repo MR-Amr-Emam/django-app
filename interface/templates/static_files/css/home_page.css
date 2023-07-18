@@ -1,0 +1,115 @@
+/* base */
+
+.base-widget{
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    aspect-ratio: 1024 / 497;
+    position: relative;
+}
+
+.base-content{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6vw;
+    font-weight: 700;
+    width: fit-content;
+    color: rgb(255, 255, 255)
+}
+
+.base-content:hover{
+    cursor:default;
+    user-select: none;
+}
+
+.btn-primary{
+    position: relative;
+    left:50%;
+    transform: translate(-50%);
+    font-size: 2.5vw;
+    border: 0;
+    border-radius: 0.3em;
+    padding: 0.2em;
+    /*background-image: radial-gradient(rgb(87, 57, 143), rgb(116, 78, 187));*/
+}
+
+.btn-primary:hover{
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+    background-color: #3485ff;
+    box-shadow: 0px 0px 10px #3677d9;
+}
+
+.btn-primary.active{
+    display: block;
+}
+
+
+/* content */
+
+.main-f-color{
+    color: rgb(111,66,193);
+}
+
+
+.card{
+    box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.175), 0px 1px 6px rgba(0, 0, 0, 0.175),
+    -1px 0px 6px rgba(0, 0, 0, 0.175), 0px -1px 6px rgba(0, 0, 0, 0.175);
+    background-color: rgb(197,179,230);
+    margin-bottom: 5%;
+}
+
+.p-card{
+    font-size: 22px;
+}
+
+.img-row-1{
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 1px 0px 6px rgba(39, 14, 85, 0.3), 0px 1px 6px rgba(39, 14, 85, 0.3),
+    -1px 0px 6px rgba(39, 14, 85, 0.3), 0px -1px 6px rgba(39, 14, 85, 0.3);
+}
+
+/* reveal images */
+
+ul.row-bottom li::marker{
+    color: rgb(111,66,193);
+    font-weight: bold;
+}
+
+.reveal-left{
+    transform: translate(-5%);
+    opacity: 0;
+
+}
+
+.reveal-right{
+    transform: translate(5%);
+    opacity: 0;
+}
+
+.reveal-left.active{
+    transform: translate(0);
+    opacity: 1;
+    transition: all 1s ease-out;
+}
+
+.reveal-right.active{
+    transform: translate(0);
+    opacity: 1;
+    transition: all 1s ease-out;
+}
+
+/* end content */
+
+.contact-content{
+    background-color: rgb(26, 0, 75);
+    color: rgb(89, 55, 153);
+}
+
+.a-linkedin{
+    text-decoration: none;
+    color: rgb(89, 55, 153);
+}

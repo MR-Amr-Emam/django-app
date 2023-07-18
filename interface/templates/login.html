@@ -1,0 +1,42 @@
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link href="{% static 'css/bootstrap css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/login.css' %}" rel="stylesheet">
+        <title>projects_assignment</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row h-25"></div>
+            <div class="row align-items-center">
+                <div class="col-4"></div>
+                <form class="form col-4 rounded-3 p-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="username">
+                        <label for="floatingInput">username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" autocomplete="on">
+                        <label for="floatingPassword">Password</label>
+                        <p class="text-danger fs-6"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">login</button>
+                </form>
+                <div class="col-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <p><a href="{% url 'interface-signup' %}">dont have account? create one</a></p>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+        <script>
+            const loginUrl = "{% url 'authenticate-login' %}"
+        </script>
+        <script src="{% static 'js/login.js' %}"></script>
+    </body>
+</html>

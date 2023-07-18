@@ -1,0 +1,89 @@
+{% load static %}
+<html lang="en" data-bs-theme="blue">
+    <head>
+        <meta charset="utf-8">
+        <link href="{% static 'css/bootstrap css/bootstrap.min.css' %}" rel="stylesheet">
+        <style>
+          .navbar{
+            background-color: rgba(197, 179, 230, 0.5);
+          }
+        </style>
+
+        <title>projects_assignment</title>
+
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'interface-home' %}">projects assignment</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'interface-home' %}">Home</a>
+                </li>
+                <li>
+                  <a class="nav-link active" href="{% url 'interface-completeprojects' %}">view projects</a>
+                </li>
+              </ul>
+              <form class="d-flex position-absolute top-50 end-0 translate-middle-y" role="search">
+                <input id="search-input" class="form-control me-2" type="search" placeholder="Search project" aria-label="Search">
+                <button id="search-btn" class="btn btn-outline-success">Search</button>
+              </form>
+            </div>
+  </div>
+</nav>
+
+        <script>
+
+          const notCompleteprojectsUrl = document.location.origin + "{% url 'interface-projects' %}";
+          const searchResultUrl = document.location.origin + "{% url 'interface-searchresult' %}";
+          const submitUrl = document.location.origin + "{% url 'interface-submit_project' %}";
+          const loginUrl = document.location.origin + "{% url 'interface-login' %}";
+          const personalInformation = {}
+
+          async function getPersonalData(){
+
+            var response = await fetch("{% url 'authentication-personaluser' %}", {method:"GET"})
+            var data = await response.json()
+
+            personalInformation["username"]=data["username"]
+            personalInformation["is_staff"]=data["is_staff"]
+            personalInformation["profileUrl"]="{% url 'interface-profile' 'username' %}"
+            .replace("username", data["username"])
+            
+            return(personalInformation)
+          }
+
+        </script>
+
+        <script>
+          function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+                }
+              }
+            }
+            return cookieValue;
+          }
+          const csrftoken = getCookie('csrftoken');
+        </script>
+
+        <script src="{% static 'js/base.js' %}"></script>
+
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

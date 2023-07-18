@@ -1,0 +1,12 @@
+/** main color rgb(111,66,193)
+    secondary color rgb(197,179,230) **/
+
+
+body{
+    background-image: linear-gradient(to bottom, rgb(197,179,230), white);
+}
+
+.form{
+    background-color:white;
+}
+

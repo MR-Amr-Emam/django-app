@@ -1,0 +1,100 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block content %}
+
+<link href="{% static 'css/submit_page.css' %}" rel="stylesheet">
+<link href="{% static 'css/icons.css' %}" rel="stylesheet">
+
+<div class="popup d-none">
+    <div class="bg-light-subtle shadow-sm position-absolute top-50 start-50 translate-middle fs-3 rounded">
+        <p class="text-end me-3 mt-3"><i class="fi fi-rr-cross-small close-btn"></i></p>
+        <div class=" px-5 pb-5">
+            successfully submitted <i class="fi fi-rr-check-circle text-success"></i>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid base-widget">
+    <div class="row text-light">
+        <div class="col ms-5 mt-4">
+            <div class="row">
+                <div class="row fs-1 fw-bolder">
+                    <p>thank you for chosing us</p>
+                </div>
+            </div>
+            <div class="row">
+                <form>
+                    <p>
+                        <label for="project_description" class="form-label fs-3">project description</label>
+                        <textarea type="text" id="project_description" class="form-control w-80" aria-describedby="exampleFormControlTextarea1"></textarea>
+                        <p class="text-black description-error d-none">must write a description</p>
+                    </p>
+                    <p>
+                        <div class="mb-3">
+                            <label for="project_file" class="form-label fs-3">insert your project (pdf file)</label>
+                            <input class="form-control w-80" type="file" id="project_file">
+                            <p class="text-black file-error-1 d-none">enter a file</p>
+                            <p class="text-black file-error-2 d-none">must be pdf file</p>
+                        </div>
+                    </p>
+                    <p><button class="btn btn-warning fs-4 px-4">submit</button></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <div class="col-8">
+                    <img class="bg-image" src="{% static 'images/submitproject-image.png' %}">
+                </div>
+                <div class="col-4">
+                    <div class="row my-5 me-5"><div class="card fs-4">enjoy outstanding experiment</div></div>
+                    <div class="row my-5 me-5"><div class="card fs-4">your first step to success</div></div>
+                    <div class="row my-5 me-5"><div class="card fs-4">enjoy outstanding response</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid h-50 contact-content">
+
+    <div class="row">
+        <div class="col">
+            <h3>email</h3>
+            <p>amradar757@gmail.com</p>
+        </div>
+        <div class="col">
+            <h3>linked in</h3>
+            <p><a href="https://www.linkedin.com/in/amr-emam-0b5255231" class="a-linkedin">visit us</a></p>
+        </div>
+        <div class="col">
+            <h3>phone number</h3>
+            <p>01152182723</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>powered by</h3>
+            <p>django</p>
+        </div>
+        <div class="col">
+            <h3>made by</h3>
+            <p>Amr Emam</p>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+<script>
+    const projectUrl = "{% url 'projects-create' %}"
+    const homepageUrl = "{% url 'interface-home' %}"
+</script>
+
+<script src="{% static 'js/submit_page.js' %}"></script>
+
+{% endblock %}
