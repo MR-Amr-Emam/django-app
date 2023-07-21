@@ -109,6 +109,7 @@ class UserInformationApi(generics.RetrieveUpdateAPIView):
     def get_object(self):
         username = self.kwargs["username"]
         return UserInformation.objects.get(user=User.objects.get(username=username))
+    
 
 
 class ProfileImage(View):
@@ -116,22 +117,12 @@ class ProfileImage(View):
         user = get_object_or_404(User, username=kwargs["username"])
         image = user.user_information.profile_image
 
-
-        try:
-            with image.open("rb") as image:
-                response = HttpResponse(image.read(), headers={
-                'Content-Type': 'image/jpeg',
-                'Content-Disposition': 'inline; filename="profile.jpg"',
-                })
-                return response
-        except:
-            print("nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
-            with open(os.path.join(settings.BASE_DIR, "files/user_information/defaultprofileimage.jpg"),"rb") as image:
-                response = HttpResponse(image.read(), headers={
-                'Content-Type': 'image/jpeg',
-                'Content-Disposition': 'inline; filename="profile.jpg"',
-                })
-                return response
+        with image.open("rb") as image:
+            response = HttpResponse(image.read(), headers={
+            'Content-Type': 'image/jpeg',
+            'Content-Disposition': 'inline; filename="profile.jpg"',
+            })
+            return response
 
 
 class CroppedProfileImage(View):
@@ -140,19 +131,10 @@ class CroppedProfileImage(View):
         image = user.user_information.cropped_profile_image
 
 
-        try:
-            with image.open("rb") as image:
-                response = HttpResponse(image.read(), headers={
-                'Content-Type': 'image/jpeg',
-                'Content-Disposition': 'inline; filename="profile.jpg"',
-                })
-                return response
-        except:
-            print("nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
-            with open(os.path.join(settings.BASE_DIR, "files/user_information/defaultcroppedprofile.jpg"), "rb") as image:
-                response = HttpResponse(image.read(), headers={
-                'Content-Type': 'image/jpeg',
-                'Content-Disposition': 'inline; filename="profile.jpg"',
-                })
-                return response
+        with image.open("rb") as image:
+            response = HttpResponse(image.read(), headers={
+            'Content-Type': 'image/jpeg',
+            'Content-Disposition': 'inline; filename="profile.jpg"',
+            })
+            return response
 

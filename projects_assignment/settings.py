@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%l@&vw3)cwk7819z-9^29j+bk=d&l3i-ni)0@c2+p-0!1-f1%o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["mrAmrEmam.pythonanywhere.com"]
+ALLOWED_HOSTS = ["mrAmrEmam.pythonanywhere.com", "127.0.0.1"]
 CSRF_COOKIE_DOMAIN = "mrAmrEmam.pythonanywhere.com"
 CSRF_TRUSTED_ORIGINS = ["https://mrAmrEmam.pythonanywhere.com"]
 SESSION_COOKIE_SECURE = True

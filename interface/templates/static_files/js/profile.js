@@ -84,19 +84,30 @@ function openImagePopup(){
             viewMode: 1,
             ready: function () {
               croppable = true;
-            }});
+            }
+        });
     }
 }
 
 function crop(){
-    croppedCanvas = cropper.getCroppedCanvas();
-    profileImageEle.src = croppedCanvas.toDataURL();
-    sendImage(croppedCanvas);
-    popupOverlay.classList.remove("active");
+    loadingScreen.classList.add("active")
+    if(changeImageBtn != ""){
+        var image = changeImageBtn.files[0]
+        var croppedCanvas = cropper.getCroppedCanvas();
+        profileImageEle.src = croppedCanvas.toDataURL();
+        sendImage(croppedCanvas, image).then((data)=>{
+            popupOverlay.classList.remove("active");
+            loadingScreen.classList.remove("active");
+        })
+    }else{
+        croppedCanvas = cropper.getCroppedCanvas();
+        profileImageEle.src = croppedCanvas.toDataURL();
+        sendImage(croppedCanvas).then((data)=>{
+            popupOverlay.classList.remove("active");
+            loadingScreen.classList.remove("active");
+        })
+    }
 }
-
-cropBtn.addEventListener("click", crop)
-changeImageBtn.addEventListener("change", changeImage)
 
 
 
@@ -118,42 +129,46 @@ function changeImage() {
     let container = document.querySelector(".image-canvas-container")
     container.appendChild(divEle)
 
-    var cropper = new Cropper(imageEle, {
+    cropper = new Cropper(imageEle, {
         aspectRatio: 1,
         viewMode: 1,
         ready: function () {
           croppable = true;
         }});
-
-    function crop(){
-        var croppedCanvas = cropper.getCroppedCanvas();
-        profileImageEle.src = croppedCanvas.toDataURL();
-        sendImage(croppedCanvas, image);
-        popupOverlay.classList.remove("active");
-    }
-    cropBtn.addEventListener("click", crop)
-
 }
 
 
-function sendImage(croppedCanvas, image=null){
-
-    croppedCanvas.toBlob( blob =>{
-        var croppedImage = new File([blob], "cropped_profile.jpg")
-        var formData = new FormData()
-        if(image!=null){
-            formData.append("profile_image", image)
-        }
-        formData.append("cropped_profile_image", croppedImage)
-        fetch(userInformationUrl,{
-            method:"PUT",
-            headers:{
-                "X-CSRFToken":csrftoken,
-            },
-            body:formData,
-        }).then(data => {console.log(data)}).catch(error =>{console.log(error)})
+function getCanvasBlob(canvas) {
+    return new Promise(function(resolve, reject) {
+      canvas.toBlob(function(blob) {
+        resolve(blob)
+      })
     })
+  }
+
+
+async function sendImage(croppedCanvas, image=null){
+    var blob = await getCanvasBlob(croppedCanvas);
+    var croppedImage = new File([blob], "cropped_profile.jpg")
+    var formData = new FormData()
+    if(image!=null){
+        formData.append("profile_image", image)
+    }
+    formData.append("cropped_profile_image", croppedImage)
+
+    var response = await fetch(userInformationUrl,{
+        method:"PUT",
+        headers:{
+            "X-CSRFToken":csrftoken,
+        },
+        body:formData,
+    })
+    return response
 }
+
+
+cropBtn.addEventListener("click", crop)
+changeImageBtn.addEventListener("change", changeImage)
 
 
 //changing user information
