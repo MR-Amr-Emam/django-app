@@ -6,6 +6,7 @@ from reportlab.lib.units import inch
 from PIL import Image as PImage
 from io import BytesIO
 
+import os
 
 PAGE_HEIGHT=defaultPageSize[1]
 PAGE_WIDTH=defaultPageSize[0]
@@ -16,14 +17,15 @@ def pageTemplate(canvas, doc):
     canvas.line(0, PAGE_HEIGHT-inch*1.1, PAGE_WIDTH, PAGE_HEIGHT-inch*1.1)
     canvas.line(0, inch*0.7, PAGE_WIDTH, inch*0.7)
     canvas.drawString(inch, 0.5 * inch, "page number {}".format(doc.page))
-    
 
 
-def buildDoc(review_details ,comments, title, general_comment):
-    doc = SimpleDocTemplate("files/reviews/"+title, pagesize=defaultPageSize)
+
+def buildDoc(review_details ,comments, title, general_comment, BASE_DIR):
+    path = os.path.join(os.path.join(BASE_DIR,"files/reviews"), title)
+    doc = SimpleDocTemplate(path, pagesize=defaultPageSize)
     story = []
 
-    
+
     if review_details.accepted == True:
         state = "Accepted"
         state_color = "#1D7E00"
@@ -45,7 +47,7 @@ def buildDoc(review_details ,comments, title, general_comment):
     story.append(Spacer(0, 0.4*inch))
     story.append(Paragraph(state, ParagraphStyle("Helvetica",
     textColor=state_color, fontSize=40, leftIndent=0.2*PAGE_WIDTH)))
-    
+
     line = Line(0,0, 4*inch, 0, strokeWidth=0.25, strokeColor="#c9c9c8")
 
     story.append(Spacer(0, 1.2*inch))
@@ -77,7 +79,7 @@ def buildDoc(review_details ,comments, title, general_comment):
     d = Drawing(0, 0.2*inch)
     d.add(line)
     story.append(d)
-    
+
     story.append(Spacer(0, 0.5*inch))
     story.append(Paragraph(general_comment.comment, ParagraphStyle("gg", fontSize=16, leading=18, textColor="#171615")))
 
@@ -129,4 +131,3 @@ def buildDoc(review_details ,comments, title, general_comment):
 
 
 
-    

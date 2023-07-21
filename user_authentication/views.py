@@ -7,9 +7,10 @@ from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.conf import settings
 
 from .models import *
-
+import os
 
 class CanChangeUser(permissions.BasePermission):
     def has_object_permission(self, request, view, instance):
@@ -63,7 +64,7 @@ class SignupView(View):
             errors["username"] = "less than 5 characters"
         if len(password) < 5:
             errors["password"] = "less than 5 charcaters"
-        
+
         if errors:
             errors["result"] = "negative"
             return JsonResponse(errors)
@@ -108,12 +109,13 @@ class UserInformationApi(generics.RetrieveUpdateAPIView):
     def get_object(self):
         username = self.kwargs["username"]
         return UserInformation.objects.get(user=User.objects.get(username=username))
-    
+
 
 class ProfileImage(View):
     def get(self, request, **kwargs):
         user = get_object_or_404(User, username=kwargs["username"])
         image = user.user_information.profile_image
+
 
         try:
             with image.open("rb") as image:
@@ -123,7 +125,8 @@ class ProfileImage(View):
                 })
                 return response
         except:
-            with open("./files/user_information/defaultprofileimage.jpg", "rb") as image:
+            print("nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+            with open(os.path.join(settings.BASE_DIR, "files/user_information/defaultprofileimage.jpg"),"rb") as image:
                 response = HttpResponse(image.read(), headers={
                 'Content-Type': 'image/jpeg',
                 'Content-Disposition': 'inline; filename="profile.jpg"',
@@ -136,6 +139,7 @@ class CroppedProfileImage(View):
         user = get_object_or_404(User, username=kwargs["username"])
         image = user.user_information.cropped_profile_image
 
+
         try:
             with image.open("rb") as image:
                 response = HttpResponse(image.read(), headers={
@@ -144,12 +148,11 @@ class CroppedProfileImage(View):
                 })
                 return response
         except:
-            with open("./files/user_information/defaultprofileimage.jpg", "rb") as image:
+            print("nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+            with open(os.path.join(settings.BASE_DIR, "files/user_information/defaultcroppedprofile.jpg"), "rb") as image:
                 response = HttpResponse(image.read(), headers={
                 'Content-Type': 'image/jpeg',
                 'Content-Disposition': 'inline; filename="profile.jpg"',
                 })
                 return response
-            
 
-        

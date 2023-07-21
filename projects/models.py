@@ -3,6 +3,10 @@ from django.db.models.fields.files import FieldFile, FileField
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.conf import settings
+
+import os
+
 
 class ProjectFieldFile(FieldFile):
     @property
@@ -12,7 +16,7 @@ class ProjectFieldFile(FieldFile):
 class ProjectFileField(FileField):
     attr_class = ProjectFieldFile
 
-fs = FileSystemStorage(location = "files/projects")
+fs = FileSystemStorage(location = os.path.join(settings.BASE_DIR, "files/projects"))
 
 
 class Project(models.Model):
@@ -25,18 +29,18 @@ class Project(models.Model):
     @property
     def review_project_page_url(self):
         return reverse("interface-projectreview", kwargs={"id":self.id})
-    
+
     @property
     def publisher_username(self):
         return self.publisher.username
-    
+
     @property
     def project_page_url(self):
         return reverse("interface-completeproject", kwargs={"id":self.id})
-    
+
     @property
     def profile_url(self):
         return reverse("interface-profile", kwargs={"username": self.publisher.username})
-    
+
 
 

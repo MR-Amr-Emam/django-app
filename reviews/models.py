@@ -3,9 +3,12 @@ from django.contrib.auth.models import User
 from projects.models import Project
 from django.core.files.storage import FileSystemStorage
 from django.db.models.fields.files import FieldFile, FileField
+from django.conf import settings
+
+import os
 
 
-fs = FileSystemStorage(location = "files/reviews")
+fs = FileSystemStorage(location = os.path.join(settings.BASE_DIR, "files/reviews"))
 
 
 class ProjectFieldFile(FieldFile):
@@ -27,7 +30,7 @@ class Review(models.Model):
     @property
     def review_location(self):
         return "files/reviews/reviewpdf-{}.pdf".format(self.id)
-    
+
     @property
     def reviewer_name(self):
         return self.reviewer.username

@@ -33,7 +33,7 @@ class ReturnReview(generics.RetrieveAPIView):
             review = Review.objects.create(project=project)
         except:
             review = Review.objects.create(project=project)
-        
+
         return review
 
 
@@ -58,7 +58,7 @@ class FinishReview(generics.UpdateAPIView):
     queryset = Review.objects.all()
     permission_classes = [IsAuthenticated, IsAdminUser]
     lookup_field = "id"
-    
+
     def perform_update(self, serializer):
         review = serializer.save(reviewer=self.request.user, review_date=datetime.datetime.now())
         if review.project.state == True:
@@ -66,11 +66,11 @@ class FinishReview(generics.UpdateAPIView):
         comments = Comment.objects.filter(review=review, general_comment=False)
         general_comment = Comment.objects.filter(review=review, general_comment=True)[0]
         title = "reviewpdf-{}.pdf".format(review.id)
-        buildDoc(review ,comments, title, general_comment)
+        buildDoc(review ,comments, title, general_comment, settings.BASE_DIR)
         review.review_pdf = reverse("review-pdfreview", args=[review.id])
         review.save()
         return review
-        
+
 
 class CompleteFinishReview(View):
     def put(self, request):
@@ -87,12 +87,12 @@ class CompleteFinishReview(View):
                     review.delete()
                 except:
                     pass
-            return JsonResponse({"state":state})       
+            return JsonResponse({"state":state})
         else:
             raise PermissionDenied()
 
 
-       
+
 
 class GetReviewFile(View):
     def get(self, request, **kwargs):

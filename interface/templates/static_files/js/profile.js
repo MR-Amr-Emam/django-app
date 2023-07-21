@@ -73,7 +73,7 @@ function openImagePopup(){
         }catch{}
 
         document.querySelector(".image-buttons").classList.add("active")
-        document.querySelector(".image-canvas-container").innerHTML = 
+        document.querySelector(".image-canvas-container").innerHTML =
         "<div class='image-container'>"
         +    `<img class='popup-profile-image' src='${imageUrl}'>`
         +"</div>"
@@ -124,7 +124,7 @@ function changeImage() {
         ready: function () {
           croppable = true;
         }});
-    
+
     function crop(){
         var croppedCanvas = cropper.getCroppedCanvas();
         profileImageEle.src = croppedCanvas.toDataURL();
@@ -151,7 +151,7 @@ function sendImage(croppedCanvas, image=null){
                 "X-CSRFToken":csrftoken,
             },
             body:formData,
-        })
+        }).then(data => {console.log(data)}).catch(error =>{console.log(error)})
     })
 }
 
