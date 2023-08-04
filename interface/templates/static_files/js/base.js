@@ -1,22 +1,30 @@
 function isAuthenticated(data){
+    var submitProjectEle = document.querySelectorAll(".submit-project");
+    var myProfileEle = document.querySelectorAll(".my-profile");
+    var signEle = document.querySelectorAll(".sign-in");
+
     if(data["username"]==""){
-        var navbar = document.querySelector(".navbar-nav");
-        navbar.innerHTML += `<li class="nav-item"><a class="nav-link active"
-        href="${loginUrl}">sign in</a></li>`
+        signEle.forEach(element => {
+            element.classList.remove("d-none")
+        });
     }else{
-        var navbar = document.querySelector(".navbar-nav");
-        navbar.innerHTML += `<li class="nav-item"><a class="nav-link active"
-        href="${submitUrl}">submit project</a></li>`
-        navbar.innerHTML += `<li class="nav-item">
-        <a class="nav-link active personalprofile" href="${data["profileUrl"]}">my profile</a></li>`;
+        myProfileEle.forEach(element => {
+            element.firstElementChild.setAttribute("href", document.location.origin + data["profileUrl"])
+            element.classList.remove("d-none");
+        });
+        submitProjectEle.forEach(element => {
+            element.classList.remove("d-none");
+        });
     }
 }
 
 
 function isStaffFunc(isStaff){
     if(isStaff == true){
-        var navbar = document.querySelector(".navbar-nav");
-        navbar.innerHTML += `<li class="nav-item"><a href=${notCompleteprojectsUrl} class="nav-link active text-success fw-bold">review projects</a></li>`;
+        var reviewEle = document.querySelectorAll(".review-projects");
+        reviewEle.forEach(element =>{
+            element.classList.remove("d-none")
+        })
     }
 }
 
@@ -25,9 +33,21 @@ function isStaffFunc(isStaff){
 getPersonalData().then((data)=>{isAuthenticated(data);isStaffFunc(data["is_staff"]);})
 
 
-function search(e){
-    e.preventDefault()
-    lookup = document.querySelector("#search-input").value
+function sideMenu(){
+    var sideMenu = document.querySelector(".side-menu");
+    var displayed = sideMenu.classList.value.split(" ").includes("active");
+    if(displayed == true){
+        sideMenu.classList.remove("active")
+    }else if(displayed == false){
+        sideMenu.classList.add("active")
+    }
+    
+}
+
+
+
+function search(order){
+    lookup = document.querySelectorAll("#search-input")[order].value
     if(lookup){
         console.log(lookup)
         var url = searchResultUrl + `?lookup=${lookup}`
@@ -36,4 +56,7 @@ function search(e){
 
 }
 
-document.querySelector("#search-btn").addEventListener("click", search)
+
+document.querySelector(".navbar-toggler").addEventListener("click", sideMenu)
+document.querySelectorAll("#search-btn")[0].addEventListener("click", function(e){e.preventDefault();search(0)})
+document.querySelectorAll("#search-btn")[1].addEventListener("click", function(e){e.preventDefault();search(1)})

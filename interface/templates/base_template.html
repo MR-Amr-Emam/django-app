@@ -3,12 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link href="{% static 'css/bootstrap css/bootstrap.min.css' %}" rel="stylesheet">
-        <style>
-          .navbar{
-            background-color: rgba(197, 179, 230, 0.5);
-          }
-        </style>
-
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
         <title>projects_assignment</title>
 
     </head>
@@ -28,6 +23,19 @@
                 <li>
                   <a class="nav-link active" href="{% url 'interface-completeprojects' %}">view projects</a>
                 </li>
+                <li class="nav-item submit-project d-none">
+                  <a class="nav-link active" href="{% url 'interface-submit_project' %}">submit project</a>
+                </li>
+                <li class="nav-item my-profile d-none">
+                  <a class="nav-link active personalprofile" href="">my profile</a>
+                </li>
+                <li class="nav-item review-projects d-none">
+                  <a class="nav-link active text-success fw-bold"
+                  href="{% url 'interface-projects' %}">review projects</a>
+                </li>
+                <li class="nav-item sign-in d-none">
+                  <a class="nav-link active" href="{% url 'interface-login' %}">sign in</a>
+                </li>
               </ul>
               <form class="d-flex position-absolute top-50 end-0 translate-middle-y" role="search">
                 <input id="search-input" class="form-control me-2" type="search" placeholder="Search project" aria-label="Search">
@@ -36,6 +44,33 @@
             </div>
   </div>
 </nav>
+
+<div class="side-menu container-fluid">
+  <form class="d-flex pt-4" role="search">
+    <input id="search-input" class="form-control me-2" type="search" placeholder="Search project" aria-label="Search">
+    <button id="search-btn" class="btn btn-outline-success">Search</button>
+  </form>
+  <ul class="navbar-nav me-auto mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'interface-home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="{% url 'interface-completeprojects' %}">view projects</a>
+    </li>
+    <li class="nav-item submit-project d-none">
+      <a class="nav-link active" href="{% url 'interface-submit_project' %}">submit project</a>
+    </li>
+    <li class="nav-item my-profile d-none">
+      <a class="nav-link active" href="">my profile</a>
+    </li>
+    <li class="nav-item review-projects d-none">
+      <a class="nav-link active text-success fw-bold" href="{% url 'interface-projects' %}">review projects</a>
+    </li>
+    <li class="nav-item sign-in d-none">
+      <a class="nav-link active" href="{% url 'interface-login' %}">sign in</a>
+    </li>
+  </ul>
+</div>
 
         <script>
 

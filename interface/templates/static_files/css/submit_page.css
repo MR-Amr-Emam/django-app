@@ -1,16 +1,21 @@
 .base-widget{
     background-color: #6f42c1;
-    height: 95%;
+    min-height: 50vh;
+    padding-bottom: 10%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .bg-image{
-    width:100%;
+    min-width: 200px;
+    width: 100%;
 }
 
 .card{
     background-color: #e2d9f2;
     box-shadow: 0px 0px 6px;
     position: static;
+    min-height: 70px;
 }
 
 /* end content */
@@ -37,4 +42,27 @@
 
 .close-btn:hover{
     cursor: pointer;
+}
+
+
+/* loading screen */
+
+#loading-screen{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100vh;
+    width: 100vw;
+}
+
+.loading-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: 400;
+    padding: 1em;
+    border-radius: 2em;
+    background-color: white;
 }

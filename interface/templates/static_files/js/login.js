@@ -17,7 +17,8 @@ const csrftoken = getCookie('csrftoken');
 
 
 const Btn = document.getElementsByTagName("button")[0]
-
+const loadingScreen = document.querySelector("#loading-screen")
+const container = document.querySelector(".container")
 
 function login(e){
     e.preventDefault()
@@ -27,6 +28,8 @@ function login(e){
     const password = document.getElementById("floatingPassword").value
     const formData = new FormData()
 
+    container.classList.add("d-none")
+    loadingScreen.classList.remove("d-none")
     formData.append("username", username)
     formData.append("password", password)
     
@@ -50,6 +53,8 @@ function login(e){
             var p = document.getElementsByClassName("text-danger")[0]
             p.innerText = response["error"]
             document.getElementById("floatingPassword").classList.add("is-invalid")
+            loadingScreen.classList.add("d-none")
+            container.classList.remove("d-none")
         }
     })
 

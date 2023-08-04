@@ -11,7 +11,7 @@ import os
 class ProjectFieldFile(FieldFile):
     @property
     def url(self):
-        return "/projects/project_file_{}/".format(Project.objects.get(project_file=self).id)
+        return "/projects/project_file_{}/".format(self.instance.id)
 
 class ProjectFileField(FileField):
     attr_class = ProjectFieldFile

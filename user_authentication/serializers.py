@@ -15,19 +15,22 @@ class UserInformationSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         try:
-            validated_data["profile_image"]
-            os.remove(instance.profile_image.path)
+            validated_data["profile_image"].name = "profile_{}.jpg".format(instance.user.username)
+            if os.path.basename(instance.profile_image.name) == "defaultprofileimage.jpg":
+                pass
+            else:
+                os.remove(instance.profile_image.path)
         except:
             pass
         try:
-            validated_data["cropped_profile_image"]
-            print(instance.cropped_profile_image.path)
-            os.remove(instance.cropped_profile_image.path)
+            validated_data["cropped_profile_image"].name = "croppedprofile_{}.jpg".format(instance.user.username)
+            if os.path.basename(instance.cropped_profile_image.name) == "defaultcroppedprofile.jpg":
+                pass
+            else:
+                os.remove(instance.cropped_profile_image.path)
         except:
             pass
         return super().update(instance, validated_data)
-
-
 
 
 class UserSerializer(serializers.ModelSerializer):

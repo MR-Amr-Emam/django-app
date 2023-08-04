@@ -170,3 +170,5 @@ cython_debug/
 static/
 
 files/
+
+env-variables.txt

@@ -1,0 +1,17 @@
+.navbar{
+    background-color: rgba(197, 179, 230, 0.5);
+  }
+
+
+.side-menu{
+    background-color: rgba(197, 179, 230, 0.5);
+    display: none;
+}
+
+.side-menu.active{
+    display: block;
+}
+
+.side-menu .nav-item{
+    height: 50px;
+}

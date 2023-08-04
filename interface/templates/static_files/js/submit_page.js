@@ -1,3 +1,5 @@
+const loadingScreen = document.querySelector("#loading-screen")
+
 function submit(e){
     e.preventDefault()
     document.querySelector(".file-error-1").classList.add("d-none")
@@ -20,6 +22,7 @@ function submit(e){
         return;
     }
 
+    loadingScreen.classList.remove("d-none")
 
     formData.append("project_file", projectFile)
     formData.append("description", projectDescription)
@@ -38,6 +41,7 @@ function submit(e){
     }
 
     sendingData().then(data =>{
+        loadingScreen.classList.add("d-none")
         document.querySelector(".popup").classList.remove("d-none")
     })
 

@@ -6,6 +6,14 @@
 <link href="{% static 'css/submit_page.css' %}" rel="stylesheet">
 <link href="{% static 'css/icons.css' %}" rel="stylesheet">
 
+
+<div id="loading-screen" class="d-none">
+    <div class="loading-content">
+        loading...
+    </div>
+</div>
+
+
 <div class="popup d-none">
     <div class="bg-light-subtle shadow-sm position-absolute top-50 start-50 translate-middle fs-3 rounded">
         <p class="text-end me-3 mt-3"><i class="fi fi-rr-cross-small close-btn"></i></p>
@@ -43,18 +51,16 @@
             </div>
         </div>
 
-        <div class="col">
-            <div class="row">
-                <div class="col-8">
-                    <img class="bg-image" src="{% static 'images/submitproject-image.png' %}">
-                </div>
-                <div class="col-4">
-                    <div class="row my-5 me-5"><div class="card fs-4">enjoy outstanding experiment</div></div>
-                    <div class="row my-5 me-5"><div class="card fs-4">your first step to success</div></div>
-                    <div class="row my-5 me-5"><div class="card fs-4">enjoy outstanding response</div></div>
-                </div>
-            </div>
+        <div class="col ms-5">
+            <div class="row my-5 me-5"><div class="card fs-4">enjoy outstanding experiment</div></div>
+            <div class="row my-5 me-5"><div class="card fs-4">your first step to success</div></div>
+            <div class="row my-5 me-5"><div class="card fs-4">enjoy outstanding response</div></div>
         </div>
+
+        <div class="col">
+            <img class="bg-image" src="{% static 'images/submitproject-image.png' %}">
+        </div>
+
     </div>
 </div>
 

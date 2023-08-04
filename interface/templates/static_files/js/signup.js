@@ -17,6 +17,8 @@ const csrftoken = getCookie('csrftoken');
 
 
 const Btn = document.getElementsByTagName("button")[0]
+const loadingScreen = document.querySelector("#loading-screen")
+const container = document.querySelector(".container")
 
 function signup(e){
 
@@ -27,6 +29,9 @@ function signup(e){
     var password = document.getElementById("Password")
     var confirmPassword = document.getElementById("confirm-Password")
     var formData = new FormData()
+
+    container.classList.add("d-none")
+    loadingScreen.classList.remove("d-none")
 
     formData.append("username", username.value)
     formData.append("email", email.value)
@@ -67,6 +72,8 @@ function signup(e){
                 confirmPassword.classList.remove("is-invalid")
                 document.getElementById("confirm-password-danger").innerText = ""
             }
+            loadingScreen.classList.add("d-none")
+            container.classList.remove("d-none")
         }else if(response["result"] == "positive"){
             document.location.replace(profileUrl.replace("username", response["username"])+"?new=yes")
         }

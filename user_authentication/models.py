@@ -10,8 +10,9 @@ import os
 class CroppedImageFieldFile(ImageFieldFile):
     @property
     def url(self):
-        user = UserInformation.objects.get(cropped_profile_image=self).user
+        user = self.instance.user
         return "/authenticate/croppedprofileimage_{}".format(user.username)
+
 
 class CroppedImageImageField(ImageField):
     attr_class = CroppedImageFieldFile
@@ -19,7 +20,7 @@ class CroppedImageImageField(ImageField):
 class ProfileImageFieldFile(ImageFieldFile):
     @property
     def url(self):
-        user = UserInformation.objects.get(profile_image=self).user
+        user = self.instance.user
         return "/authenticate/profileimage_{}".format(user.username)
 
 class ProfileImageImageField(ImageField):
