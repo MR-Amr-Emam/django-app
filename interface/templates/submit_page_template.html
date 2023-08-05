@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="row">
-                <form>
+                <form>{% csrf_token %}
                     <p>
                         <label for="project_description" class="form-label fs-3">project description</label>
                         <textarea type="text" id="project_description" class="form-control w-80" aria-describedby="exampleFormControlTextarea1"></textarea>

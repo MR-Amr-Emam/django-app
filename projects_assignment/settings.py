@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 with open(os.path.join(BASE_DIR, "env-variables.txt")) as file:
     SECRET_KEY = file.read()
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["mrAmrEmam.pythonanywhere.com", "127.0.0.1"]
-CSRF_COOKIE_DOMAIN = "mrAmrEmam.pythonanywhere.com"
-CSRF_TRUSTED_ORIGINS = ["https://mrAmrEmam.pythonanywhere.com"]
+CSRF_TRUSTED_ORIGINS = ["https://mrAmrEmam.pythonanywhere.com", "http://127.0.0.1:8000"]
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 # Application definition

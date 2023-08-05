@@ -15,7 +15,6 @@ function getCookie(name) {
 }
 const csrftoken = getCookie('csrftoken');
 
-
 const Btn = document.getElementsByTagName("button")[0]
 const loadingScreen = document.querySelector("#loading-screen")
 const container = document.querySelector(".container")
@@ -49,7 +48,7 @@ function login(e){
         if(response["url"] != undefined){
             url = window.location.origin + response["url"]
             window.location.href = url
-        }if(response["error"] != undefined){
+        }else if(response["error"] != undefined){
             var p = document.getElementsByClassName("text-danger")[0]
             p.innerText = response["error"]
             document.getElementById("floatingPassword").classList.add("is-invalid")

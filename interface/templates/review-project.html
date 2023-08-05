@@ -75,7 +75,7 @@
         <div class="row pt-3 w-50 mx-auto">
             <div class="col justify-content-center">
                 <div class="add-comment-container">
-                    <div class="mx-auto">
+                    <div class="mx-auto">{% csrf_token %}
                         <textarea class="text-input" id="text-comment" placeholder="write a comment"></textarea>
                         <p class="text-danger warn-comment-message d-none">must write a comment</p>
                     </div>

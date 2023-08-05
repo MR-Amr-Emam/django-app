@@ -10,7 +10,6 @@ from django.urls import reverse
 from django.conf import settings
 
 from .models import *
-import os
 
 class CanChangeUser(permissions.BasePermission):
     def has_object_permission(self, request, view, instance):

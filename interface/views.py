@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, Http404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 class HomePageView(View):
@@ -27,6 +28,11 @@ class SignupView(View):
 
 class ProfileView(View):
     def get(self, request, **kwargs):
+        username = kwargs["username"]
+        try:
+            User.objects.get(username=username)
+        except:
+            raise Http404
         return render(request, "profile.html")
     
 class ReviewProjectsView(View):
@@ -37,7 +43,6 @@ class ReviewProjectsView(View):
             return render(request, "review-projects.html")
         else:
             return HttpResponseNotAllowed("<h1> not allowed </h1>")
-
 
 class ProjectView(View):
     def get(self, request, **kwargs):
@@ -62,3 +67,4 @@ class CompleteProject(View):
 class SearchProject(View):
     def get(self, request, **kwargs):
         return render(request, "search.html")
+    
